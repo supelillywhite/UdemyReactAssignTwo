@@ -8,11 +8,11 @@ class App extends Component {
     userInput: ''
   }
 
-  inputChangedHandler = (event) => {
-    this.setState({userInput: event.target.value});
+  onChangeHandler = (event) => {
+    this.setState({userInput: event.target.value})
   }
 
-  deleteCharHandler = ( index ) => {
+  deleteCharHandler = (index) => {
     const text = this.state.userInput.split('');
     text.splice(index, 1);
     const updatedText = text.join('');
@@ -23,16 +23,15 @@ class App extends Component {
     const charList = this.state.userInput.split('').map((char, index) => {
       return <Char 
         character={char} 
-        key={index} 
+        key={index}
         clicked={() => this.deleteCharHandler(index)} />;
     });
 
     return (
       <div className="App">
-        <input type="text" onChange={this.inputChangedHandler}
-        value={this.state.userInput} />
-        <p>Here is the input text: {this.state.userInput}</p>
-        <Validation inputLength={this.state.userInput.length} inputText={this.state.userInput} />
+        <input type="text" onChange={this.onChangeHandler} value={this.state.userInput}/>
+        <p>Here is the user inputted text: {this.state.userInput}</p>
+        <Validation inputLength={this.state.userInput.length} />
         {charList}
       </div>
     );
